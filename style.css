@@ -7,7 +7,7 @@ html {
     box-sizing: inherit;
   }
   
-  body {
+  * {
     margin: 0;
     padding: 0;
   }
@@ -17,8 +17,8 @@ html {
   
   body {
     color: #111;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
     line-height: 147%;
   }
   
@@ -73,17 +73,128 @@ html {
   
   /* ---- components ---- */
   
-  .button {
-    width: 100%;
-    background-color: blue;
-    color: #fff;
-    border: 1px solid #fff
+  .game {
+    text-align: center;
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .game header {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-top: 40px;
+    margin-bottom: 40px;
+
+  }
+
+  .game .label {
+    font-weight: 700;
+    font-size: 30px;
+    padding-right: 10px;
+  }
+
+  .game .value {
+    font-weight: 400;
+  }
+
+  .game .score {
+    flex: 1;
+  }
+  .game .timer {
+    flex: 1;
+  }
+
+/*  */
+  .game .deck {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .game .deck div {
+    margin-right: 20px;
+  }
+
+  .game .deck div:last-child {
+    padding-right: 0px;
+  }
+
+
+
+  .game .current-card {
+    flex: 1;
+    font-size: 40px;
+    background-color: lightgray;
+    border: 1px solid #000;
+    padding: 100px 0;
+    border-radius: 10px;
+
   }
   
-  .button-alt {
-    color: blue;
-    background-color: #fff;
+
+
+  .game .actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
+
+  .game .up {
+    flex: 1;
+    padding: 20px 0;
+    background: #fff;
+    border: 1px solid #111;
+    margin-bottom: 20px;
+    border-radius: 10px;
+  }
+
+  .game .down {
+    flex: 1;
+    padding: 20px 0;
+    background: #fff;
+    border: 1px solid #111;
+    border-radius: 10px;
+  }
+
+  .game .next-card {
+    flex: 1;
+    font-size: 40px;
+    background-color: lightgray;
+    border: 1px solid #000;
+    padding: 100px 0;
+    border-radius: 10px;
+  }
+
+
+  /*  */
+
+  .game footer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    line-height: 45px;
+  }
+
+
+
+
+  
+  
+  .label
+  .value
+  .timer
+  .label
+  .value
+  
+  
+
+  .label
+  .step-no
+  .total-steps
   
   /* ---- section ---- */
   
