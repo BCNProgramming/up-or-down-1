@@ -49,11 +49,12 @@ function main() {
         // temporary!!! move to Game.js
         game = new Game ();
         game.start();
+        game.onOver(function () {
+            gameOver();
+        })
         
 
-        window.setTimeout(function () {
-            gameOver()
-        }, 3000);
+        
 
     }
 

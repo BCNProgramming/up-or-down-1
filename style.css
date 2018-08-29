@@ -20,9 +20,12 @@ html {
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     line-height: 147%;
+    padding: 0 40px;
   }
   
-  h1 {}
+  h1 {
+    margin: 40px 0 20px;
+  }
   
   h2 {}
   
@@ -32,6 +35,10 @@ html {
     margin: 0;
   }
   
+  button {
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 0.5px;
+  }
   
   
   /* ---- layout ---- */
@@ -75,7 +82,6 @@ html {
   
   .game {
     text-align: center;
-    padding: 0 40px;
     display: flex;
     flex-direction: column;
   }
@@ -119,7 +125,7 @@ html {
   }
 
   .game .deck div:last-child {
-    padding-right: 0px;
+    margin-right: 0px;
   }
 
 
@@ -129,7 +135,7 @@ html {
     font-size: 40px;
     background-color: lightgray;
     border: 1px solid #000;
-    padding: 100px 0;
+    padding: 60px 0;
     border-radius: 10px;
 
   }
@@ -164,7 +170,7 @@ html {
     font-size: 40px;
     background-color: lightgray;
     border: 1px solid #000;
-    padding: 100px 0;
+    padding: 60px 0;
     border-radius: 10px;
   }
 
@@ -180,22 +186,16 @@ html {
   }
 
 
+  button {
+    border: 1px solid #000;
+    padding: 20px;
+  }
+  
+  .button-alt {
+    color: blue;
+    background-color: #fff;
+  }
 
-
-  
-  
-  .label
-  .value
-  .timer
-  .label
-  .value
-  
-  
-
-  .label
-  .step-no
-  .total-steps
-  
   /* ---- section ---- */
   
   section.testimonials {
