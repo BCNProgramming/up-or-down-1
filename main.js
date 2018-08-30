@@ -4,7 +4,7 @@ function buildDom(html) {
     var div = document.createElement('div');
     div.innerHTML = html;
     return div.children[0];
-}
+};
 
 function main() {
 
@@ -13,10 +13,10 @@ function main() {
     var gameOverMain;
 
     var game; // instance of the Game
+    
+    // --- splash
 
     function buildSplash() {
-
-        // --- splash
 
         // create HTML
         splashMain = buildDom(`
@@ -45,41 +45,33 @@ function main() {
         destroySplash();
         destroyGameOver();
 
-
-        // temporary!!! move to Game.js
         game = new Game ();
         game.start();
         game.onOver(function () {
-            gameOver();
-        })
-        
+            gameOver(game.score);
+        });
 
-        
-
-    }
+    };
 
     function destroyGame() {
         game.destroy();
-    }
+    };
 
     // --- game-over
 
 
-    function gameOver() {
+    function gameOver(score) {
         destroyGame();
-        buildGameOver();
-    }
+        buildGameOver(score);
+    };
 
-    function buildGameOver() {
-
-        // todo score
-        var score = 99;
+    function buildGameOver(score) {
         
         // create HTML
         gameOverMain = buildDom(`
             <main>
                 <h1>Game Over</h1>
-                <p>Your score : ` + score + ` </p>
+                <p>Your score : <span></span></p>
                 <button>Restart</button>
             </main>
         `)
@@ -87,10 +79,12 @@ function main() {
         var button = gameOverMain.querySelector('button');
         button.addEventListener('click', startGame);
 
+        var span = gameOverMain.querySelector('span');
+        span.innerText = score;
+
 
         document.body.appendChild(gameOverMain);
-
-    }
+    };
 
     function destroyGameOver() {
         if (gameOverMain) {
