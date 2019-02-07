@@ -1,24 +1,21 @@
 'use strict';
 
-function Game() {
-  var self = this;
+class Game(){
 
-  self.onGameOverCallback = null;
-  self.score = 0;
-  self.timeLeft = null;
+  constructor() {
+    this.onGameOverCallback = null;
+    this.score = 0;
+    this.timeLeft = null;
 
-  
-
-//   self.cards =;
-  self.cards;
-  self.step = null;
-  self.maxStep = 10;
+    //   this.cards =;
+    this.cards;
+    this.step = null;
+    this.maxStep = 10;
 }
 
-Game.prototype.start = function () {
-  var self = this;
-
-  self.gameMain = buildDom(`
+start() {
+  
+  this.gameMain = buildDom(`
     <main class="game container">
       <header>
         <div class="score">
@@ -47,148 +44,144 @@ Game.prototype.start = function () {
     </main>
   `);
 
-  self.scoreElement = self.gameMain.querySelector('.score .value');
-  self.timeLeftElement = self.gameMain.querySelector('.timer .value');
+  this.scoreElement = this.gameMain.querySelector('.score .value');
+  this.timeLeftElement = this.gameMain.querySelector('.timer .value');
 
-  self.currentCardElement = self.gameMain.querySelector('.current-card');
-  self.nextCardElement = self.gameMain.querySelector('.next-card');
+  this.currentCardElement = this.gameMain.querySelector('.current-card');
+  this.nextCardElement = this.gameMain.querySelector('.next-card');
 
-  self.buttonUp = self.gameMain.querySelector('.up');
-  self.buttonDown = self.gameMain.querySelector('.down');
+  this.buttonUp = this.gameMain.querySelector('.up');
+  this.buttonDown = this.gameMain.querySelector('.down');
 
-  self.stepNoElement = self.gameMain.querySelector('.step-no');
-  self.totalStepsElement = self.gameMain.querySelector('.total-steps');
+  this.stepNoElement = this.gameMain.querySelector('.step-no');
+  this.totalStepsElement = this.gameMain.querySelector('.total-steps');
 
- document.body.appendChild(self.gameMain);
+  document.body.appendChild(this.gameMain);
 
-  self.showFirstCard();
+  this.showFirstCard();
 }
 
-Game.prototype.getRandomCard = function (min, max) {
+getRandomCard(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
-};
+}
 
 
-Game.prototype.showFirstCard = function () {
-  var self = this;
+showFirstCard() {
+  
 
-  self.totalStepsElement.innerText = self.maxStep;
+  this.totalStepsElement.innerText = this.maxStep;
 
-  self.step = 0;
-  self.showCard();
-  self.startTimer();
-};
+  this.step = 0;
+  this.showCard();
+  this.startTimer();
+}
 
-Game.prototype.triggerTimeout = function () {
-  var self = this;
+triggerTimeout() {
+  
+  this.score--;
+  this.scoreElement.innerText = this.score;
+  this.nextCard();
+}
 
-  self.score--;
-  self.scoreElement.innerText = self.score;
-  self.nextCard();
-};
+nextCard () {
+  
+  this.step++;
 
-Game.prototype.nextCard = function () {
-  var self = this;
-
-  self.step++;
-
-  if (self.step === self.maxStep) {
-    self.onGameOverCallback();
+  if (this.step === this.maxStep) {
+    this.onGameOverCallback();
   } else {
-    self.showCard();
-    self.startTimer();
+    this.showCard();
+    this.startTimer();
   }
-};
+}
 
-Game.prototype.showCard = function () {
-  var self = this;
+showCard() {
+  
+  this.currentCard = this.getRandomCard(1,10);
+  this.currentCardElement.innerText = this.currentCard;
+  this.nextCardElement.innerText = '?';
 
-  var currentCard = self.getRandomCard(1,10);
-  self.currentCardElement.innerText = currentCard;
-  self.nextCardElement.innerText = '?';
+  this.stepNoElement.innerText = this.step + 1;
 
-  self.stepNoElement.innerText = self.step + 1;
-
-  self.handleClickUp = function () {
-    self.revealNumber(true);
+  this.handleClickUp = function () {
+    this.revealNumber(true);
   }
-  self.buttonUp.addEventListener('click', self.handleClickUp);
-  self.buttonUp.removeAttribute('disabled');
+  this.buttonUp.addEventListener('click', this.handleClickUp);
+  this.buttonUp.removeAttribute('disabled');
 
-  self.handleClickDown = function () {
-    self.revealNumber(false);
+  this.handleClickDown = function () {
+    this.revealNumber(false);
   }
-  self.buttonDown.addEventListener('click', self.handleClickDown);
-  self.buttonDown.removeAttribute('disabled');
-};
+  this.buttonDown.addEventListener('click', this.handleClickDown);
+  this.buttonDown.removeAttribute('disabled');
+}
 
-Game.prototype.startTimer = function () {
-  var self = this;
+startTimer() {
 
-  self.timeLeft = 3;
-  self.timeLeftElement.innerText = self.timeLeft;
-  self.intervalId = window.setInterval(function () {
-    self.timeLeft--;
-    self.timeLeftElement.innerText = self.timeLeft;
+  this.timeLeft = 3;
+  this.timeLeftElement.innerText = this.timeLeft;
+  this.intervalId = window.setInterval(function () {
+    this.timeLeft--;
+    this.timeLeftElement.innerText = this.timeLeft;
 
-    if (self.timeLeft === 0) {
-      clearInterval(self.intervalId);
-      self.triggerTimeout();
+    if (this.timeLeft === 0) {
+      clearInterval(this.intervalId);
+      this.triggerTimeout();
     }
   }, 1000);
-};
+}
 
-Game.prototype.revealNumber = function (answerWasUp) {
-  var self = this;
+  revealNumber(answerWasUp) {
+  
+    
+  clearInterval(this.intervalId);
+  this.buttonUp.removeEventListener('click', this.handleClickUp);
+  this.buttonUp.setAttribute('disabled', 'disabled');
+  this.buttonDown.removeEventListener('click', this.handleClickDown);
+  this.buttonDown.setAttribute('disabled', 'disabled');
 
-  clearInterval(self.intervalId);
-  self.buttonUp.removeEventListener('click', self.handleClickUp);
-  self.buttonUp.setAttribute('disabled', 'disabled');
-  self.buttonDown.removeEventListener('click', self.handleClickDown);
-  self.buttonDown.setAttribute('disabled', 'disabled');
-
-  var currentCard = self.getRandomCard(1,10);
-  var nextCard = self.getRandomCard(1,10);
+  var currentCard = this.getRandomCard(1,10);
+  var nextCard = this.getRandomCard(1,10);
 
   var className = '';
 
   if (answerWasUp && nextCard > currentCard) {
-    self.score++;
+    this.score++;
     className = 'correct';
   } else if (answerWasUp && nextCard < currentCard) {
-    self.score--;
+    this.score--;
     className = 'incorrect';
   } else if (!answerWasUp && nextCard < currentCard) {
-    self.score++;
+    this.score++;
     className = 'correct';
   } else if (!answerWasUp && nextCard > currentCard) {
-    self.score--;
+    this.score--;
     className = 'incorrect';
   } else {
-    self.score--;
+    this.score--;
     className = 'incorrect';
   }
 
-  self.scoreElement.innerText = self.score;
+  this.scoreElement.innerText = this.score;
 
-  self.nextCardElement.classList.add(className);
-  self.nextCardElement.innerText = nextCard;
+  this.nextCardElement.classList.add(className);
+  this.nextCardElement.innerText = nextCard;
 
   setTimeout(function () {
-    self.nextCardElement.classList.remove(className);
-    self.nextCard();
+    this.nextCardElement.classList.remove(className);
+    this.nextCard();
   }, 2000);
-};
+}
 
 
-Game.prototype.onOver = function (callback) {
-  var self = this;
-
-  self.onGameOverCallback = callback;
-};
-
-Game.prototype.destroy = function () {
-  var self = this;
+onOver(callback) {
   
-  self.gameMain.remove();
-};
+  this.onGameOverCallback = callback;
+}
+
+destroy() {
+  
+  this.gameMain.remove();
+}
+
+}
