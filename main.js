@@ -1,12 +1,12 @@
 'use strict';
 
-function buildDom(html) {
+ const buildDom = (html)=> {
     const div = document.createElement('div');
     div.innerHTML = html;
     return div.children[0];
 };
 
-function main() {
+const main = ()=>{
 
 
     let splashMain;
@@ -16,7 +16,7 @@ function main() {
     
     // --- splash
 
-    function buildSplash() {
+    const buildSplash = ()=> {
 
         // create HTML
         splashMain = buildDom(`
@@ -34,38 +34,36 @@ function main() {
     }
 
         // remove the splash to pass to the start of the game
-    function destroySplash() {
+    const destroySplash = ()=>{
         splashMain.remove();
     }
 
 
     // --- game 
 
-    function startGame() {
+    const startGame = ()=> {
         destroySplash();
         destroyGameOver();
 
         game = new Game();
         game.start();
-        game.onOver(function () {
-            gameOver(game.score);
-        });
+        game.onOver(()=> gameOver(game.score));
 
     };
 
-    function destroyGame() {
+    const destroyGame = () => {
         game.destroy();
     };
 
     // --- game-over
 
 
-    function gameOver(score) {
+    const gameOver = (score)=> {
         destroyGame();
         buildGameOver(score);
     };
 
-    function buildGameOver(score) {
+    const buildGameOver= (score)=> {
         
         // create HTML
         gameOverMain = buildDom(`
@@ -86,7 +84,7 @@ function main() {
         document.body.appendChild(gameOverMain);
     };
 
-    function destroyGameOver() {
+    const destroyGameOver= ()=>{
         if (gameOverMain) {
             gameOverMain.remove();
         }

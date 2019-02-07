@@ -89,44 +89,42 @@ class Game {
   }
 
   showCard() {
-    const _this=this;
+    //const _this=this;
     this.currentCard = this.getRandomCard(1, 10);
     this.currentCardElement.innerText = this.currentCard;
     this.nextCardElement.innerText = "?";
 
     this.stepNoElement.innerText = this.step + 1;
 
-    this.handleClickUp = function() {
-      _this.revealNumber(true);
-    };
+    this.handleClickUp = ()=> this.revealNumber(true);
+    
     this.buttonUp.addEventListener("click", this.handleClickUp);
     this.buttonUp.removeAttribute("disabled");
 
-    this.handleClickDown = function() {
-      _this.revealNumber(false);
-    };
+    this.handleClickDown = ()=> this.revealNumber(false);
+    
     this.buttonDown.addEventListener("click", this.handleClickDown);
     this.buttonDown.removeAttribute("disabled");
   }
 
   startTimer() {
-    const _this = this;
+    //const _this = this;
     this.timeLeft = 3;
     this.timeLeftElement.innerText = this.timeLeft;
-    this.intervalId = setInterval(function() {
+    this.intervalId = setInterval(()=> {
       
-      _this.timeLeft--;
-      _this.timeLeftElement.innerText = _this.timeLeft;
+      this.timeLeft--;
+      this.timeLeftElement.innerText = this.timeLeft;
 
-      if (_this.timeLeft === 0) {
-        clearInterval(_this.intervalId);
-        _this.triggerTimeout();
+      if (this.timeLeft === 0) {
+        clearInterval(this.intervalId);
+        this.triggerTimeout();
       }
     }, 1000);
   }
 
   revealNumber(answerWasUp) {
-    const _this=this;
+    //const _this=this;
     clearInterval(this.intervalId);
     this.buttonUp.removeEventListener("click", this.handleClickUp);
     this.buttonUp.setAttribute("disabled", "disabled");
@@ -160,9 +158,9 @@ class Game {
     this.nextCardElement.classList.add(className);
     this.nextCardElement.innerText = nextCard;
 
-    setTimeout(function() {
-      _this.nextCardElement.classList.remove(className);
-      _this.nextCard();
+    setTimeout(()=> {
+      this.nextCardElement.classList.remove(className);
+      this.nextCard();
     }, 2000);
   }
 
