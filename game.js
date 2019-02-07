@@ -89,6 +89,7 @@ class Game {
   }
 
   showCard() {
+    const _this=this;
     this.currentCard = this.getRandomCard(1, 10);
     this.currentCardElement.innerText = this.currentCard;
     this.nextCardElement.innerText = "?";
@@ -96,33 +97,36 @@ class Game {
     this.stepNoElement.innerText = this.step + 1;
 
     this.handleClickUp = function() {
-      this.revealNumber(true);
+      _this.revealNumber(true);
     };
     this.buttonUp.addEventListener("click", this.handleClickUp);
     this.buttonUp.removeAttribute("disabled");
 
     this.handleClickDown = function() {
-      this.revealNumber(false);
+      _this.revealNumber(false);
     };
     this.buttonDown.addEventListener("click", this.handleClickDown);
     this.buttonDown.removeAttribute("disabled");
   }
 
   startTimer() {
+    const _this = this;
     this.timeLeft = 3;
     this.timeLeftElement.innerText = this.timeLeft;
-    this.intervalId = window.setInterval(function() {
-      this.timeLeft--;
-      this.timeLeftElement.innerText = this.timeLeft;
+    this.intervalId = setInterval(function() {
+      
+      _this.timeLeft--;
+      _this.timeLeftElement.innerText = _this.timeLeft;
 
-      if (this.timeLeft === 0) {
-        clearInterval(this.intervalId);
-        this.triggerTimeout();
+      if (_this.timeLeft === 0) {
+        clearInterval(_this.intervalId);
+        _this.triggerTimeout();
       }
     }, 1000);
   }
 
   revealNumber(answerWasUp) {
+    const _this=this;
     clearInterval(this.intervalId);
     this.buttonUp.removeEventListener("click", this.handleClickUp);
     this.buttonUp.setAttribute("disabled", "disabled");
@@ -157,8 +161,8 @@ class Game {
     this.nextCardElement.innerText = nextCard;
 
     setTimeout(function() {
-      this.nextCardElement.classList.remove(className);
-      this.nextCard();
+      _this.nextCardElement.classList.remove(className);
+      _this.nextCard();
     }, 2000);
   }
 
