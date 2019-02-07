@@ -1,5 +1,3 @@
-'use strict';
-
 class Game(){
 
   constructor() {
@@ -15,7 +13,7 @@ class Game(){
 
 start() {
   
-  this.gameMain = buildDom(`
+  this.gameMain = document.buildDom(`
     <main class="game container">
       <header>
         <div class="score">
