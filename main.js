@@ -1,7 +1,7 @@
 'use strict';
 
 function buildDom(html) {
-    var div = document.createElement('div');
+    const div = document.createElement('div');
     div.innerHTML = html;
     return div.children[0];
 };
@@ -9,10 +9,10 @@ function buildDom(html) {
 function main() {
 
 
-    var splashMain;
-    var gameOverMain;
+    let splashMain;
+    let gameOverMain;
 
-    var game; // instance of the Game
+    let game; // instance of the Game
     
     // --- splash
 
@@ -28,7 +28,7 @@ function main() {
         
         document.body.appendChild(splashMain);
 
-        var button = splashMain.querySelector('button');
+        const button = splashMain.querySelector('button');
         button.addEventListener('click', startGame)
 
     }
@@ -45,7 +45,7 @@ function main() {
         destroySplash();
         destroyGameOver();
 
-        game = new Game ();
+        game = new Game();
         game.start();
         game.onOver(function () {
             gameOver(game.score);
@@ -76,10 +76,10 @@ function main() {
             </main>
         `)
 
-        var button = gameOverMain.querySelector('button');
+        const button = gameOverMain.querySelector('button');
         button.addEventListener('click', startGame);
 
-        var span = gameOverMain.querySelector('span');
+        const span = gameOverMain.querySelector('span');
         span.innerText = score;
 
 

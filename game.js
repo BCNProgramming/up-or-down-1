@@ -1,4 +1,6 @@
-class Game(){
+'use strict';
+
+class Game {
 
   constructor() {
     this.onGameOverCallback = null;
@@ -6,14 +8,14 @@ class Game(){
     this.timeLeft = null;
 
     //   this.cards =;
-    this.cards;
+    this.cards=null;
     this.step = null;
     this.maxStep = 10;
 }
 
 start() {
   
-  this.gameMain = document.buildDom(`
+  this.gameMain = buildDom(`
     <main class="game container">
       <header>
         <div class="score">
@@ -103,7 +105,7 @@ showCard() {
 
   this.handleClickUp = function () {
     this.revealNumber(true);
-  }
+  };
   this.buttonUp.addEventListener('click', this.handleClickUp);
   this.buttonUp.removeAttribute('disabled');
 
